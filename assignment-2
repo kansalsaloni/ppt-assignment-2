@@ -176,6 +176,14 @@ cout << "Enter the elements of the array: ";
     for (int i = 0; i < n; i++) {
         cin >> nums[i];
     }
+    sort(nums.begin(), nums.end());
+    int product1 = nums[n-1] * nums[n-2] * nums[n-3];
+
+    // Calculate the product of the first two elements (negative numbers) and the last element (largest positive number)
+    int product2 = nums[0] * nums[1] * nums[n-1];
+
+   
+    cout<<max(product1, product2);
 
 OUTPUT:
 Input: nums = [1,2,3]
@@ -188,9 +196,27 @@ Ans6.
 
 #include<bits/stdc++.h>
 using namespace std;
+int search(vector<int>& nums, int target) {
+    int left = 0;
+    int right = nums.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (nums[mid] == target) {
+            return mid;  // Found the target, return its index
+        } else if (nums[mid] < target) {
+            left = mid + 1;  // Search in the right half of the array
+        } else {
+            right = mid - 1;  // Search in the left half of the array
+        }
+    }
+
+    return -1;
+    }
+    
 int main() {
 int n;
-bool result=false;
 cout << "Enter the number of elements in the array: ";
 cin>>n>>endl;
 
@@ -199,20 +225,8 @@ cout << "Enter the elements of the array: ";
     for (int i = 0; i < n; i++) {
         cin >> nums[i];
     }
-unordered_set<int> set;
-    for (int i = 0; i < nums.size(); i++) {
-
-        if (set.find(nums[i]!=set.end()) {
-          result=true;
-          break;
-        }
-    set.insert(num[i]);
-    }
-cout<<result;
-
-return 0;
-}
-
+ int index = search(nums, target);
+cout<<index;
 OUTPUT:
 Input: nums = [-1,0,3,5,9,12], target = 9
 Output: 4
@@ -221,35 +235,37 @@ Q7.An array is monotonic if it is either monotone increasing or monotone decreas
 An array nums is monotone increasing if for all i <= j, nums[i] <= nums[j]. An array nums is
 monotone decreasing if for all i <= j, nums[i] >= nums[j].
 Ans7.
+
 #include<bits/stdc++.h>
 using namespace std;
+
+
 int main() {
-int n;
+  int n;
+ bool increasing = true;
+ bool decreasing = true;
 cout << "Enter the number of elements in the array: ";
 cin>>n>>endl;
+
 
 vector<int> nums(n);
 cout << "Enter the elements of the array: ";
     for (int i = 0; i < n; i++) {
         cin >> nums[i];
     }
-int nonzero=0;
-    for (int i = 0; i < nums.size(); i++) {
-        if(nums[i]!=0){
-          nums[nonzero]=nums[i];
-          nonzero++;
-        }
+  for (int i = 1; i < n; i++) {
+      if(nums[i-1] <=nums[i])decreasing=false;
+      if(nums[i-1] >=nums[i])increasing=false;
     }
- while (nonZeroIndex < n) {
-        nums[nonZeroIndex] = 0;
-        nonZeroIndex++;
-    }
-for(int i=0;i<n;i++)
-{
-cout<<nums[i];
+ 
+if(increasing || decreasing;)
+   cout << "true ";
+else
+cout<<"false";
+    return 0;
 }
-return 0;
-}
+
+
 OUTPUT:
 Input: nums = [1,2,2,3]
 Output: true
