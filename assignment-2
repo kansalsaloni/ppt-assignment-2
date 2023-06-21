@@ -280,28 +280,42 @@ Ans8.
 
 #include<bits/stdc++.h>
 using namespace std;
+int minimumScore(:vector<int>& nums, int k) {
+     int n = nums.size();
+    int minVal = *std::min_element(nums.begin(), nums.end());
+    int maxVal = *std::max_element(nums.begin(), nums.end());
+
+   if (maxVal - minVal == 0) {
+        return 0;
+    }
+
+    // Calculate the upper and lower bounds for the new maximum and minimum values
+    int newMax = maxVal - k;
+    int newMin = minVal + k;
+
+    // If the upper bound is less than the lower bound, return the difference between the maximum and minimum values
+    if (newMax < newMin) {
+        return maxVal - minVal;
+    }
+
+    // Otherwise, return the difference between the upper bound and lower bound
+    return newMax - newMin;
+}
+
+
 int main() {
 int n;
 cout << "Enter the number of elements in the array: ";
 cin>>n>>endl;
-
+cout<<"enter value of k";
+cin>>k;
 vector<int> nums(n);
 cout << "Enter the elements of the array: ";
     for (int i = 0; i < n; i++) {
         cin >> nums[i];
     }
-    vector<int>result;
-    for (int i = 0; i < nums.size(); i++) {
-        if(nums[i]!=i+1){
-          result.push_back(nums[i]);
-          result.push_back(i+1);
-        }
-    }
-
-    for(int i=0;i<2;i++)
-    {
-    cout<<result[i];
-    }
+  int minScore = minimumScore(nums, k);
+ cout<<minscore
 return 0;
 }
 
